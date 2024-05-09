@@ -8,14 +8,14 @@ const getTotalIsles = function (grid) {
       
       
       for (let index = 0; index < grid[i].length; index++) {
-        const element = grid[index];
+        const element = grid[i][index];
         if(flag && arr[i][index]=="L"){
             count++;
             flag=false;
         }
         if(element=="L"){
           if(grid[i][index]==grid[i][index+1]){
-            grid[index]="W"
+            grid[i][index]="W"
           }
         }
         
