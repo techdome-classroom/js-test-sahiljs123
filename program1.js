@@ -1,29 +1,34 @@
 const getTotalIsles = function (grid) {
-
-
-    // write your code here
-    let count=0;
-    let flag=true;
-    for (let i = 0; i < grid.length; i++) {
-      
-      
-      for (let index = 0; index < grid[i].length; index++) {
-        const element = grid[i][index];
-        if(flag && arr[i][index]=="L"){
-            count++;
-            flag=false;
-        }
-        if(element=="L"){
-          if(grid[i][index]==grid[i][index+1]){
-            grid[i][index]="W"
-          }
-        }
-        
-      }
+  const exploreIsland = (grid, i, j) => {
+    
+    if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] === 'W') {
+        return;
     }
-    return count;
+   
+    grid[i][j] = 'W';
 
+    exploreIsland(grid, i - 1, j);
+    exploreIsland(grid, i + 1, j); 
+    exploreIsland(grid, i, j - 1); 
+    exploreIsland(grid, i, j + 1);
+};
+
+let count = 0;
+
+for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+        
+        if (grid[i][j] === 'L') {
+            exploreIsland(grid, i, j);
+            count++;
+        }
+    }
+}
+
+return count;
+
+
+  
   };
   
   module.exports = getTotalIsles;
-
